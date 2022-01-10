@@ -19,34 +19,15 @@ func main() {
 		os.Exit(0)
 	}
 
-	fmt.Println("HELP   :", args.Help)
-	fmt.Println("URL    :", args.Url)
-	fmt.Println("METHOD :", args.Method)
-	fmt.Println("REQ    :", args.RequestBodyFilePath)
-	fmt.Println("RES    :", args.OutputFilePath)
-
 	request, err := cmd.NewRequest(args.Url, args.RequestBodyFilePath, args.OutputFilePath)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	res := ""
-	switch m := args.Method; m {
-	case "get":
-		res, err = request.GetRequest()
-		if err != nil {
-			fmt.Println(err)
-		}
-	case "post":
-		res, err = request.PostRequest()
-		if err != nil {
-			fmt.Println(err)
-		}
-	case "patch":
-	case "delete":
-	default:
-		fmt.Println("internal error")
+	res, err := request.SendRequest(args.Method)
+	if err != nil {
+		fmt.Println(err)
 		os.Exit(1)
 	}
 

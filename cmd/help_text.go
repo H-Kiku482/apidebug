@@ -10,7 +10,7 @@ Options:
   -i string
         Import request body from textfile.
   -m string
-        Select http method. (default "get")
+        Select http method. (default "GET")
   -o string
         Output response body to textfile.`
 }

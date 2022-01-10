@@ -26,7 +26,7 @@ func GetArgs() (*cmdArgs, error) {
 	)
 
 	help = flag.Bool("h", false, "Print this message and exit.")
-	method = flag.String("m", "get", "Select http method.")
+	method = flag.String("m", "GET", "Select http method.")
 	requestBodyFilePath = flag.String("i", "", "Import request body from textfile.")
 	outputFile = flag.String("o", "", "Output response body to textfile.")
 
@@ -41,21 +41,9 @@ func GetArgs() (*cmdArgs, error) {
 		}
 	}
 
-	m := strings.ToLower(*method)
-	method = &m
-
-	switch *method {
-	case "get":
-	case "post":
-	case "patch":
-	case "delete":
-	default:
-		return nil, errors.New("cannot use the selected method\nplease select one of 'get', 'post', 'patch' or 'delete'")
-	}
-
 	ca.Help = *help
 	ca.Url = url
-	ca.Method = *method
+	ca.Method = strings.ToUpper(*method)
 	ca.RequestBodyFilePath = *requestBodyFilePath
 	ca.OutputFilePath = *outputFile
 
