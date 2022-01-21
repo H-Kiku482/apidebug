@@ -31,22 +31,32 @@ func main() {
 		os.Exit(1)
 	}
 
-	if args.OutputFilePath == "" {
+	if args.OutputFilePath == "" && args.AutoExtFilePath == "" {
 		fmt.Println(res)
 	} else {
-		if args.AutoExtFile {
+		if args.AutoExtFilePath != "" {
 			switch r := res[0:1]; r {
 			case "{":
-				args.OutputFilePath += ".json"
+				args.AutoExtFilePath += ".json"
 			default:
-				args.OutputFilePath += ".html"
+				args.AutoExtFilePath += ".html"
 			}
+
+			f, err := os.Create(args.AutoExtFilePath)
+			if err != nil {
+				fmt.Println("failed to output " + args.AutoExtFilePath)
+			}
+
+			f.WriteString(res)
+			f.Close()
 		}
-		f, err := os.Create(args.OutputFilePath)
-		if err != nil {
-			fmt.Println("failed to output " + args.OutputFilePath)
+		if args.OutputFilePath != "" {
+			f, err := os.Create(args.OutputFilePath)
+			if err != nil {
+				fmt.Println("failed to output " + args.OutputFilePath)
+			}
+			f.WriteString(res)
+			f.Close()
 		}
-		f.WriteString(res)
-		f.Close()
 	}
 }
