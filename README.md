@@ -9,6 +9,8 @@ Usage:  apidebug [OPTIONS]... URL
    or:  apidebug -m POST -i FILE -o FILE URL
 
 Options:
+  -f string
+        Automatically detect the file extensions. (json or html)
   -h    Print this message and exit.
   -i string
         Import request body from textfile.
