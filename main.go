@@ -34,6 +34,14 @@ func main() {
 	if args.OutputFilePath == "" {
 		fmt.Println(res)
 	} else {
+		if args.AutoExtFile {
+			switch r := res[0:1]; r {
+			case "{":
+				args.OutputFilePath += ".json"
+			default:
+				args.OutputFilePath += ".html"
+			}
+		}
 		f, err := os.Create(args.OutputFilePath)
 		if err != nil {
 			fmt.Println("failed to output " + args.OutputFilePath)

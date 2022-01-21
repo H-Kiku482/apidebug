@@ -12,6 +12,7 @@ type cmdArgs struct {
 	Method              string
 	RequestBodyFilePath string
 	OutputFilePath      string
+	AutoExtFile         bool
 }
 
 func GetArgs() (*cmdArgs, error) {
@@ -23,12 +24,14 @@ func GetArgs() (*cmdArgs, error) {
 		method              *string
 		requestBodyFilePath *string
 		outputFile          *string
+		autoExtFile         *bool
 	)
 
 	help = flag.Bool("h", false, "Print this message and exit.")
 	method = flag.String("m", "GET", "Select http method.")
 	requestBodyFilePath = flag.String("i", "", "Import request body from textfile.")
 	outputFile = flag.String("o", "", "Output response body to textfile.")
+	autoExtFile = flag.Bool("f", false, "Automaticary choose file extension. (json or html)")
 
 	flag.Parse()
 
@@ -46,6 +49,7 @@ func GetArgs() (*cmdArgs, error) {
 	ca.Method = strings.ToUpper(*method)
 	ca.RequestBodyFilePath = *requestBodyFilePath
 	ca.OutputFilePath = *outputFile
+	ca.AutoExtFile = *autoExtFile
 
 	return ca, nil
 }
