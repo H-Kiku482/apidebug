@@ -6,7 +6,8 @@ func GetHelpText() string {
    or:  apidebug -m POST -i FILE -o FILE URL
 
 Options:
-  -f    Automaticary choose file extension. (json or html)
+  -f string
+        Automatically detect the file extensions. (json or html)
   -h    Print this message and exit.
   -i string
         Import request body from textfile.

@@ -31,7 +31,7 @@ func GetArgs() (*cmdArgs, error) {
 	method = flag.String("m", "GET", "Select http method.")
 	requestBodyFilePath = flag.String("i", "", "Import request body from textfile.")
 	outputFile = flag.String("o", "", "Output response body to textfile.")
-	autoExtFile = flag.String("f", "", "Automaticary choose file extension. (json or html)")
+	autoExtFile = flag.String("f", "", "Automatically detect the file extensions. (json or html)")
 
 	flag.Parse()
 
